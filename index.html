@@ -1,0 +1,346 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  Megaphone, 
+  Users, 
+  TrendingUp, 
+  FileText, 
+  Video, 
+  Smartphone, 
+  ShieldCheck, 
+  ChevronRight, 
+  Menu, 
+  X,
+  Play,
+  ArrowRight,
+  CheckCircle2,
+  Award
+} from 'lucide-react';
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'サービス', href: '#services' },
+    { name: '科学的集客', href: '#marketing' },
+    { name: '業界知見', href: '#insights' },
+    { name: '実績', href: '#cases' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-amber-500 selection:text-slate-900">
+      {/* Header */}
+      <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/90 backdrop-blur-md py-3 shadow-xl' : 'bg-transparent py-5'}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <div className="bg-gradient-to-br from-amber-400 to-red-600 p-1.5 rounded-lg">
+              <Megaphone className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-xl font-bold tracking-tighter uppercase italic">Stage Arts</span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a key={link.name} href={link.href} className="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors">
+                {link.name}
+              </a>
+            ))}
+            <button className="bg-amber-500 hover:bg-amber-600 text-slate-950 px-6 py-2 rounded-full text-sm font-bold transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
+              無料相談はこちら
+            </button>
+          </div>
+
+          <button className="md:hidden text-slate-100" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-slate-950 pt-24 px-6 md:hidden">
+          <div className="flex flex-col gap-6">
+            {navLinks.map((link) => (
+              <a key={link.name} href={link.href} className="text-2xl font-bold border-b border-slate-800 pb-2" onClick={() => setIsMenuOpen(false)}>
+                {link.name}
+              </a>
+            ))}
+            <button className="w-full bg-amber-500 text-slate-950 py-4 rounded-xl font-bold text-lg">
+              無料相談を予約
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-20 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500 rounded-full blur-[128px]"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-600 rounded-full blur-[128px]"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="inline-flex items-center gap-2 bg-slate-900 border border-slate-800 px-4 py-1.5 rounded-full mb-6">
+              <span className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></span>
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest">舞台業界の変革、今始まる</span>
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-black mb-8 leading-[1.1] tracking-tight">
+              「情熱」を<span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-500 italic">科学</span>して、<br />
+              満席の客席を。
+            </h1>
+            <p className="text-lg text-slate-400 mb-10 leading-relaxed max-w-2xl mx-auto">
+              チラシ折込の10倍のリーチ、劇団四季に学ぶ作品主義のマーケティング、そして2.5次元市場の爆発的成長。Stage Artsが、あなたの舞台を次なるステージへ導きます。
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button className="flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-600 text-slate-950 px-8 py-4 rounded-xl font-black text-lg transition-all transform hover:-translate-y-1">
+                集客を最大化する <ArrowRight className="w-5 h-5" />
+              </button>
+              <button className="flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all">
+                <Play className="w-5 h-5 fill-current" /> 実績を見る
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof / Stats */}
+      <section className="py-12 bg-slate-900/50 border-y border-slate-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl font-black text-amber-500 mb-1">10倍</div>
+              <div className="text-xs text-slate-500 uppercase font-bold">紙媒体対比リーチ効率</div>
+            </div>
+            <div>
+              <div className="text-3xl font-black text-amber-500 mb-1">7,000円〜</div>
+              <div className="text-xs text-slate-500 uppercase font-bold">広告配信の最小単価</div>
+            </div>
+            <div>
+              <div className="text-3xl font-black text-amber-500 mb-1">2.5次元</div>
+              <div className="text-xs text-slate-500 uppercase font-bold">独自の市場成長ノウハウ</div>
+            </div>
+            <div>
+              <div className="text-3xl font-black text-amber-500 mb-1">300社+</div>
+              <div className="text-xs text-slate-500 uppercase font-bold">PR戦略支援実績</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pain Point Section */}
+      <section className="py-24 bg-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-black mb-6 italic tracking-tight">なぜ、あなたの舞台は「満席」にならないのか？</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            多くの劇団が陥る罠。それは「良いものを作れば人は来る」という過信、そして「チラシを撒くだけ」の古い宣伝習慣です。
+          </p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+          {[
+            { 
+              title: "ターゲティング不足", 
+              desc: "誰に届けたいかが曖昧なチラシは、そのままゴミ箱へ。データに基づいた、興味関心層への精密なリーチが必要です。" 
+            },
+            { 
+              title: "映像の未活用", 
+              desc: "練習風景や役者の素顔こそが「見に行きたい」を作る最高の材料。静止画だけでは、舞台の情熱は伝わりません。" 
+            },
+            { 
+              title: "公式文書の欠如", 
+              desc: "メディアは「ニュース」を探しています。単なる宣伝ではない、社会性を帯びたプレスリリースの書き方を知っていますか？" 
+            },
+          ].map((item, idx) => (
+            <div key={idx} className="bg-slate-900/30 p-8 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition-colors group">
+              <div className="w-12 h-12 bg-slate-800 rounded-lg flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
+                <X className="text-red-500 group-hover:text-slate-900" />
+              </div>
+              <h3 className="text-xl font-bold mb-4">{item.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Services - Solutions */}
+      <section id="services" className="py-24 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="flex flex-col lg:flex-row gap-16 items-center">
+            <div className="lg:w-1/2">
+              <h2 className="text-4xl md:text-5xl font-black mb-8 italic">集客と組織。 <br /><span className="text-amber-500">3つの柱</span>で支える。</h2>
+              <div className="space-y-6">
+                {[
+                  { icon: <Megaphone />, title: "戦略的メディアPR", desc: "現役記者が教える「メディアに出る」プレスリリースの極意。社会の文脈に自社の舞台を位置づけ、ニュースとして拡散させます。" },
+                  { icon: <Smartphone />, title: "超精密デジタル広告", desc: "「7,000円で4.5万人に表示」。SNS広告を駆使し、紙媒体の1/10のコストでチケットを求める層へダイレクトに情報を届けます。" },
+                  { icon: <ShieldCheck />, title: "契約・キャリア支援", desc: "文化庁ガイドラインに基づく適正な契約関係の構築。俳優・スタッフが安心して創作に打ち込めるプロフェッショナルな環境を整備。" },
+                ].map((s, i) => (
+                  <div key={i} className="flex gap-6 group">
+                    <div className="flex-shrink-0 w-14 h-14 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+                      {s.icon}
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-bold mb-1">{s.title}</h4>
+                      <p className="text-slate-500 text-sm">{s.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="lg:w-1/2 relative">
+              <div className="aspect-square bg-gradient-to-br from-amber-500 to-red-600 rounded-3xl opacity-10 blur-3xl absolute -inset-4"></div>
+              <div className="relative bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl overflow-hidden">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center">
+                    <Video className="text-amber-500" />
+                  </div>
+                  <h3 className="text-xl font-bold italic tracking-tight">練習シーンが「チケット」に変わる</h3>
+                </div>
+                <div className="space-y-4">
+                  <div className="h-4 w-full bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-amber-500 w-3/4 animate-pulse"></div>
+                  </div>
+                  <div className="h-4 w-2/3 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-amber-500 w-1/2 animate-pulse"></div>
+                  </div>
+                  <p className="text-slate-500 text-sm mt-6">
+                    「稽古場の熱気が伝わり、チケット購入を即決しました」<br />
+                    SNS広告によるターゲット配信は、視聴者の心を揺さぶります。
+                  </p>
+                  <button className="mt-8 text-amber-500 font-bold flex items-center gap-2 group">
+                    詳細な戦略をダウンロード <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Insights (2.5D, Gekidan Shiki) */}
+      <section id="insights" className="py-24 bg-slate-900/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black mb-4 tracking-tighter">業界を知り、勝機を掴む。</h2>
+            <p className="text-slate-500 italic">蓄積されたデータと理論に基づく、唯一無二のインサイト。</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="p-8 bg-slate-950 border border-slate-800 rounded-3xl relative group overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <Users className="w-24 h-24" />
+              </div>
+              <h3 className="text-2xl font-black mb-4 text-amber-400">2.5次元舞台の将来性</h3>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                IPビジネスと融合した「原作の最大化」。単なる再現ではなく、没入体験への進化が新たなファン層を創出しています。そのビジネスモデルをあなたの劇団に。
+              </p>
+              <ul className="space-y-2 text-xs text-slate-500 font-bold">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-500" /> キャストの成長とファンの応援の継承</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-amber-500" /> 多角的な収益（配信、グッズ、海外展開）</li>
+              </ul>
+            </div>
+
+            <div className="p-8 bg-slate-950 border border-slate-800 rounded-3xl relative group overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <TrendingUp className="w-24 h-24" />
+              </div>
+              <h3 className="text-2xl font-black mb-4 text-red-500">劇団四季の「ロングラン」戦略</h3>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                「作品主義」を貫くことで品質を安定させ、スターの人気に依存しない経営を実現。コアファンと新規客の絶妙なバランスで、「チケットが取れない」状態を作り出します。
+              </p>
+              <ul className="space-y-2 text-xs text-slate-500 font-bold">
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-red-500" /> 作品の「命」を俳優より長く保つ</li>
+                <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-red-500" /> 地道な団体営業と顧客理解</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Case Study Grid */}
+      <section id="cases" className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-4xl font-black italic">SUCCESS CASES</h2>
+              <p className="text-slate-500 mt-2">実際のプロジェクトでの成果をご紹介します。</p>
+            </div>
+            <button className="hidden md:block bg-slate-800 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-slate-700 transition-colors">
+              全実績を見る
+            </button>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { label: "ミュージカル劇団", result: "チケット売上20%増", tag: "SNS広告運用", color: "from-amber-500/10 to-amber-500/20" },
+              { label: "2.5次元プロジェクト", result: "1,100メディア露出", tag: "戦略PR / 製作発表会", color: "from-red-500/10 to-red-500/20" },
+              { label: "舞台制作会社", result: "ブランディング再構築", tag: "Web・システム開発", color: "from-blue-500/10 to-blue-500/20" },
+            ].map((c, i) => (
+              <div key={i} className={`p-1 rounded-2xl bg-gradient-to-br ${c.color} border border-slate-800`}>
+                <div className="bg-slate-950 p-6 rounded-[calc(1rem-1px)]">
+                  <div className="text-xs font-bold text-amber-500 mb-2">{c.tag}</div>
+                  <h4 className="text-lg font-bold mb-4">{c.label}</h4>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-black text-slate-100">{c.result}</span>
+                    <Award className="w-5 h-5 text-amber-500" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 to-slate-900"></div>
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-30 pointer-events-none">
+          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_30%,rgba(245,158,11,0.3)_0%,transparent_50%)]"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+          <h2 className="text-4xl md:text-6xl font-black mb-8 italic tracking-tighter">
+            あなたの「舞台」を、 <br />
+            多くの人の<span className="text-amber-500">「記憶」</span>へ。
+          </h2>
+          <p className="text-lg text-slate-400 mb-12 max-w-2xl mx-auto">
+            プロモーションの悩み、集客の停滞、制作現場の課題。 <br />
+            演劇を愛する専門家チームが、伴走して解決します。
+          </p>
+          <div className="flex flex-col items-center gap-6">
+            <button className="px-12 py-5 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-2xl font-black text-2xl shadow-2xl shadow-amber-500/40 transition-all transform hover:scale-105 active:scale-95">
+              無料で戦略を相談する
+            </button>
+            <p className="text-sm text-slate-500 flex items-center gap-2">
+              <FileText className="w-4 h-4" /> お急ぎの方：03-XXXX-XXXX（担当直通）
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 bg-slate-950 border-t border-slate-900 text-slate-500 text-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-2">
+            <Megaphone className="w-5 h-5" />
+            <span className="font-bold tracking-tighter text-slate-300 uppercase italic">Stage Arts</span>
+          </div>
+          <div className="flex gap-8">
+            <a href="#" className="hover:text-amber-400">プライバシーポリシー</a>
+            <a href="#" className="hover:text-amber-400">利用規約</a>
+            <a href="#" className="hover:text-amber-400">会社案内</a>
+          </div>
+          <div>
+            © 2026 Stage Arts Marketing Inc. All Rights Reserved.
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
